@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#if __cplusplus >= 20200000L
+#if __GNUC__ >= 10
 #include <ranges>
 #endif
 
@@ -145,7 +145,7 @@ int main() {
                          .accumulate();
     cout << ans << endl;
   }
-#if __cplusplus >= 20200000L
+#if __GNUC__ >= 10
   {  // ranges
     stopWatch t;
     long long base = 0;
