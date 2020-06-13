@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 
+#if __GNUC__ >= 10
+#include <ranges>
+#endif
+
 using namespace std;
 
 int inc(int x) {
@@ -105,16 +109,20 @@ class lazyVec {
   }
 };
 
+constexpr int VARSNUM = 40;
+constexpr int TAKENUM = 40;
+static_assert(VARSNUM >= TAKENUM);
+
 int main() {
   vector<int> vars;
-  for (auto i = 0; i < 42; i++) vars.push_back(i);
+  for (auto i = 0; i < VARSNUM; i++) vars.push_back(i);
   {  // deferred
     stopWatch t;
     vector<shared_future<int>> fvars = makeLazyVec<launch::deferred>(vars);
     fvars = lazyMap(fvars, makeLazyFunc<launch::deferred>(fib));
     fvars = lazyMap(fvars, makeLazyFunc<launch::deferred>(inc));
     fvars = lazyMap(fvars, makeLazyFunc<launch::deferred>(inc));
-    fvars = lazyTake(fvars, 35);
+    fvars = lazyTake(fvars, TAKENUM);
     cout << accumulate(fvars.begin(), fvars.end(), 0LL, [](auto l, auto r) { return l + r.get(); }) << endl;
   }
   {  // method chain, deferred
@@ -123,7 +131,7 @@ int main() {
     const auto ans = v.map(makeLazyFunc<launch::deferred>(fib))
                          .map(makeLazyFunc<launch::deferred>(inc))
                          .map(makeLazyFunc<launch::deferred>(inc))
-                         .take(35)
+                         .take(TAKENUM)
                          .accumulate();
     cout << ans << endl;
   }
@@ -133,8 +141,17 @@ int main() {
     const auto ans = v.map(makeLazyFunc<launch::async>(fib))
                          .map(makeLazyFunc<launch::async>(inc))
                          .map(makeLazyFunc<launch::async>(inc))
-                         .take(35)
+                         .take(TAKENUM)
                          .accumulate();
     cout << ans << endl;
   }
+#if __GNUC__ >= 10
+  {  // ranges
+    stopWatch t;
+    long long base = 0;
+    for (auto i : vars | views::transform(fib) | views::transform(inc) | views::transform(inc) | views::take(TAKENUM)) base += i;
+
+    cout << base << endl;
+  }
+#endif
 }
