@@ -6,16 +6,14 @@ on:
   pull_request:
     branches: [ master ]
 
+
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-20.04
+    container: gcc:latest
     steps:
     - uses: actions/checkout@v2
-    - name: prepare
-      run: sudo apt-get install libc++-dev libc++abi-dev
     - name: version check
-      run: g++ --version && clang++ --version
+      run: g++ --version
     - name: make
-      run: make
+      run: make gcc
