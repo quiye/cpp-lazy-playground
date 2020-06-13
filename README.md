@@ -1,4 +1,4 @@
-# cpp-lazy-playground
+# cpp-lazy-playground ![C/C++ CI](https://github.com/quiye/cpp-lazy-playground/workflows/C/C++%20CI/badge.svg?branch=master)
 
 lazy samples by async libraries.
 
