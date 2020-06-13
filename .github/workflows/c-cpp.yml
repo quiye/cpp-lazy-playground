@@ -13,12 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: prepare
-      run: |-
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
-        sudo apt install gcc-10 g++-10 libc++-dev libc++abi-dev
     - name: version check
-      run: g++-10 --version && clang++ --version
+      run: g++ --version && clang++ --version
     - name: make
       run: make
