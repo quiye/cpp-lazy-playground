@@ -20,6 +20,6 @@ jobs:
         sudo apt install gcc-10 g++-10
 #       run: sudo apt-get install libc++-dev libc++abi-dev
     - name: version check
-      run: g++ --version && clang++ --version
+      run: g++-10 --version && clang++ --version
     - name: make
       run: make
