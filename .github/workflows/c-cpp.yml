@@ -14,7 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: prepare
-      run: sudo apt-get install libc++-dev libc++abi-dev
+      run: |-
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt install gcc-10 g++-10
+#       run: sudo apt-get install libc++-dev libc++abi-dev
     - name: version check
       run: g++ --version && clang++ --version
     - name: make
