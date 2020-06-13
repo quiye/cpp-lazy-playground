@@ -16,4 +16,4 @@ jobs:
     - name: version check
       run: g++ --version
     - name: make
-      run: make
+      run: make gcc
