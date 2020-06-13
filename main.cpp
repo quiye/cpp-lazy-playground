@@ -1,9 +1,12 @@
 #include <future>
 #include <iostream>
 #include <numeric>
-#include <ranges>
 #include <string>
 #include <vector>
+
+#if __cplusplus >= 20200000L
+#include <ranges>
+#endif
 
 using namespace std;
 
@@ -142,6 +145,7 @@ int main() {
                          .accumulate();
     cout << ans << endl;
   }
+#if __cplusplus >= 20200000L
   {  // ranges
     stopWatch t;
     long long base = 0;
@@ -149,4 +153,5 @@ int main() {
 
     cout << base << endl;
   }
+#endif
 }
