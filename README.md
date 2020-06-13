@@ -1,11 +1,14 @@
 # cpp-lazy-playground
 
+lazy samples by async libraries.
+
 ```sh
-$ clang++ -std=c++17 -Wall -Wextra -Werror -O0 main.cpp -o main && ./main
+$ make
+./main
 14930421
-104 ms
+80 ms
 14930421
-108 ms
+72 ms
 14930421
-1954 ms
+1102 ms
 ```
