@@ -110,7 +110,7 @@ class lazyVec {
 };
 
 constexpr int VARSNUM = 40;
-constexpr int TAKENUM = 40;
+constexpr int TAKENUM = 35;
 static_assert(VARSNUM >= TAKENUM);
 
 int main() {
