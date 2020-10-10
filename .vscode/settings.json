@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "ranges": "cpp",
+        "numeric": "cpp"
+    },
+    "editor.formatOnSave": true
+}
