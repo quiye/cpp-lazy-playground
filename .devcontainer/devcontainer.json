@@ -1,4 +1,8 @@
 {
     "name": "gcc",
-    "image": "gcc:latest"
+	"image": "gcc:latest",
+	"extensions": [
+		"ms-vscode.cpptools",
+		"austin.code-gnu-global"
+	]
 }
